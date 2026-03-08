@@ -1,104 +1,36 @@
-# RSO — Music Business Organization Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A Next.js 14 website for the RSO student organization, built with TypeScript and Tailwind CSS.
+## Getting Started
 
-## Color Scheme
-| Color | Hex | Role |
-|-------|-----|------|
-| Crimson | `#800000` | Primary brand, CTAs, accents |
-| Obsidian | `#1C1C1C` | Background |
-| Teal | `#006D6F` | Secondary accent, highlights |
-| Cream | `#F5F1E8` | Text, headings |
-| Scarlet | `#A6192E` | Tertiary accent, hover states |
+First, run the development server:
 
-## Tech Stack
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **Google Fonts**: Playfair Display + DM Sans + DM Mono
-
----
-
-## Setup Instructions
-
-### Prerequisites
-- Node.js 18.17 or later
-- npm or yarn
-
-### 1. Install dependencies
-```bash
-cd rso-website
-npm install
-```
-
-### 2. Run the development server
 ```bash
 npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to see the site.
-
-### 3. Build for production
-```bash
-npm run build
-npm start
-```
-
----
-
-## Project Structure
-```
-rso-website/
-├── app/
-│   ├── globals.css        # Global styles, animations, CSS variables
-│   ├── layout.tsx         # Root layout + metadata
-│   └── page.tsx           # Home page (assembles all sections)
-├── components/
-│   ├── Navbar.tsx         # Sticky navigation with scroll effect
-│   ├── Hero.tsx           # Animated waveform hero section
-│   ├── Ticker.tsx         # Scrolling marquee ticker
-│   ├── About.tsx          # What is RSO section
-│   ├── Mission.tsx        # 4 mission pillars grid
-│   ├── Structure.tsx      # Board roles + membership info
-│   ├── Events.tsx         # Upcoming events list
-│   ├── Join.tsx           # Apply/join CTA section
-│   └── Footer.tsx         # Footer with nav + contact
-├── public/                # Static assets (add images here)
-├── next.config.js
-├── tailwind.config.js
-├── postcss.config.js
-└── tsconfig.json
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Customization Guide
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Update content
-Each section is its own component in `/components/`. Just edit the data arrays at the top of each file:
-- **Events**: Edit the `events` array in `Events.tsx`
-- **Board roles**: Edit `boardRoles` in `Structure.tsx`
-- **Mission pillars**: Edit `pillars` in `Mission.tsx`
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Update contact info
-In `Join.tsx` and `Footer.tsx`, replace:
-- `rso@youruniversity.edu` → your actual email
-- `@rso.music` → your Instagram handle
+## Learn More
 
-### Add a logo
-Replace the text "RSO" box in `Navbar.tsx` and `Footer.tsx` with an `<Image>` component pointing to `/public/logo.png`.
+To learn more about Next.js, take a look at the following resources:
 
-### Deploy to Vercel (recommended)
-```bash
-npm install -g vercel
-vercel
-```
-Or connect your GitHub repo at [vercel.com](https://vercel.com) for auto-deployments.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Pages to Add Later
-- `/events` — Full event calendar page
-- `/members` — Member portal / login
-- `/apply` — Dedicated application form page
-- `/speakers` — Past speaker archive
-# UchiMBO
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
