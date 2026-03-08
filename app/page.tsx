@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+
+
+
 // ═══════════════════════════════════════════════════════════════════════
 //  MUSIC ENGRAVING ENGINE — pure SVG geometry, no glyph hacks
 //
@@ -562,11 +565,12 @@ export default function ComingSoon() {
     l.rel  = 'stylesheet';
     document.head.appendChild(l);
 
+
     // Set favicon
     const favicon = document.createElement('link');
     favicon.rel = 'icon';
     favicon.type = 'image/png';
-    favicon.href = '/logo.png';
+    favicon.href = '/UChicagoONLYLOGO.png';
     document.head.appendChild(favicon);
 
     // Set page title and meta
