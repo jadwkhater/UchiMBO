@@ -1,205 +1,205 @@
 'use client'
-
-import { useEffect, useRef } from 'react'
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  // Animated waveform background
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let animId: number
-    let time = 0
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-
-    resize()
-    window.addEventListener('resize', resize)
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      const waves = [
-        { amp: 30, freq: 0.008, speed: 0.02, color: 'rgba(128,0,0,0.15)', y: 0.5 },
-        { amp: 20, freq: 0.012, speed: 0.03, color: 'rgba(0,109,111,0.12)', y: 0.55 },
-        { amp: 15, freq: 0.018, speed: 0.025, color: 'rgba(166,25,46,0.1)', y: 0.45 },
-      ]
-
-      waves.forEach(({ amp, freq, speed, color, y }) => {
-        ctx.beginPath()
-        ctx.strokeStyle = color
-        ctx.lineWidth = 1.5
-
-        for (let x = 0; x <= canvas.width; x++) {
-          const waveY =
-            canvas.height * y +
-            Math.sin(x * freq + time * speed * 10) * amp +
-            Math.sin(x * freq * 0.5 + time * speed * 7) * amp * 0.5
-
-          x === 0 ? ctx.moveTo(x, waveY) : ctx.lineTo(x, waveY)
-        }
-        ctx.stroke()
-      })
-
-      time++
-      animId = requestAnimationFrame(draw)
-    }
-
-    draw()
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-end pb-20 px-6 overflow-hidden"
-      style={{ background: 'var(--obsidian)' }}
+      id="hero"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        background: '#F5F1E8',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '40px 24px',
+        overflow: 'hidden',
+        fontFamily: 'sans-serif',
+      }}
     >
-      {/* Canvas waveform */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ opacity: 0.8 }}
-      />
 
-      {/* Gradient overlays */}
-      <div
-        className="absolute inset-0"
+      {/* BG Vinyl Large — Top Right, pulled closer to center */}
+      <svg
         style={{
-          background:
-            'radial-gradient(ellipse at 80% 20%, rgba(128,0,0,0.15) 0%, transparent 60%)',
+          position: 'absolute',
+          top: '-60px',
+          right: '-60px',
+          width: '680px',
+          height: '680px',
+          opacity: 0.11,
+          animation: 'spin 18s linear infinite',
+          pointerEvents: 'none',
         }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse at 20% 80%, rgba(0,109,111,0.1) 0%, transparent 55%)',
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 right-0 h-48"
-        style={{
-          background: 'linear-gradient(to top, var(--obsidian), transparent)',
-        }}
-      />
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="100" cy="100" r="98" fill="#1C1C1C" />
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#444" strokeWidth="1.2" />
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="68" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="58" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="48" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="38" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="28" fill="#800000" />
+        <circle cx="100" cy="100" r="8" fill="#F5F1E8" />
+      </svg>
 
-      {/* Issue / Vol number — editorial style */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div
-          className="flex items-center gap-4 mb-12 opacity-0-init animate-fade-in"
-          style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
-        >
-          <div
-            className="w-2 h-2 rounded-full"
-            style={{
-              background: 'var(--teal)',
-              animation: 'pulse-dot 2s ease infinite',
-            }}
+      {/* BG Vinyl Small — Bottom Left, pulled closer to center */}
+      <svg
+        style={{
+          position: 'absolute',
+          bottom: '-40px',
+          left: '-40px',
+          width: '460px',
+          height: '460px',
+          opacity: 0.09,
+          animation: 'spin 24s linear infinite reverse',
+          pointerEvents: 'none',
+        }}
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="100" cy="100" r="98" fill="#1C1C1C" />
+        <circle cx="100" cy="100" r="82" fill="none" stroke="#444" strokeWidth="1" />
+        <circle cx="100" cy="100" r="66" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="50" fill="none" stroke="#444" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="34" fill="#800000" />
+        <circle cx="100" cy="100" r="9" fill="#F5F1E8" />
+      </svg>
+
+      {/* BG Cassette — Bottom Right, bigger and closer in */}
+      <svg
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          right: '-20px',
+          width: '380px',
+          height: '248px',
+          opacity: 0.09,
+          transform: 'rotate(-12deg)',
+          pointerEvents: 'none',
+        }}
+        viewBox="0 0 260 160"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="4" y="10" width="252" height="140" rx="12" fill="#1C1C1C" />
+        <rect x="18" y="24" width="224" height="36" fill="#800000" />
+        <line x1="30" y1="42" x2="120" y2="42" stroke="#F5F1E8" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+        <rect x="50" y="78" width="160" height="42" rx="21" fill="none" stroke="#444" strokeWidth="4" />
+        <circle cx="90" cy="99" r="12" fill="#333" />
+        <circle cx="90" cy="99" r="5" fill="#1C1C1C" />
+        <circle cx="170" cy="99" r="12" fill="#333" />
+        <circle cx="170" cy="99" r="5" fill="#1C1C1C" />
+        <path d="M70 150 L85 160 L175 160 L190 150" fill="none" stroke="#444" strokeWidth="5" />
+      </svg>
+
+      {/* BG Cassette — Top Left, bigger and closer in */}
+      <svg
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '-10px',
+          width: '280px',
+          height: '182px',
+          opacity: 0.08,
+          transform: 'rotate(10deg)',
+          pointerEvents: 'none',
+        }}
+        viewBox="0 0 260 160"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="4" y="10" width="252" height="140" rx="12" fill="#1C1C1C" />
+        <rect x="18" y="24" width="224" height="36" fill="#800000" />
+        <rect x="50" y="78" width="160" height="42" rx="21" fill="none" stroke="#444" strokeWidth="4" />
+        <circle cx="90" cy="99" r="12" fill="#333" />
+        <circle cx="90" cy="99" r="5" fill="#1C1C1C" />
+        <circle cx="170" cy="99" r="12" fill="#333" />
+        <circle cx="170" cy="99" r="5" fill="#1C1C1C" />
+      </svg>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          animation: fadeUp 0.8s ease both;
+        }
+      `}</style>
+
+      {/* Foreground Content */}
+      <div className="hero-content">
+
+        {/* Logo + Org Name */}
+        <div style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Image
+            src="/UChicagoONLYLOGOR.png"
+            alt="UChicago"
+            width={72}
+            height={72}
+            style={{ objectFit: 'contain', marginBottom: '10px' }}
           />
-          <span
-            className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: 'var(--teal)', fontFamily: 'DM Mono, monospace' }}
-          >
-            Est. 2024 — Vol. I
-          </span>
-        </div>
-
-        {/* Main headline */}
-        <h1
-          className="text-[clamp(3.5rem,12vw,10rem)] leading-none font-black mb-8 opacity-0-init animate-fade-up"
-          style={{
-            fontFamily: 'Playfair Display, serif',
-            letterSpacing: '-0.02em',
-            animationDelay: '0.3s',
-            animationFillMode: 'forwards',
-          }}
-        >
-          <span style={{ color: 'var(--cream)' }}>The</span>
-          <br />
-          <span
-            style={{
-              background:
-                'linear-gradient(135deg, var(--crimson) 0%, var(--scarlet) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Industry
-          </span>
-          <br />
-          <span style={{ color: 'var(--cream)' }}>Awaits.</span>
-        </h1>
-
-        {/* Subline + CTA row */}
-        <div
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 opacity-0-init animate-fade-up"
-          style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
-        >
-          <p
-            className="text-lg md:text-xl max-w-md leading-relaxed"
-            style={{ color: 'rgba(245,241,232,0.6)', fontFamily: 'DM Sans, sans-serif' }}
-          >
-            RSO prepares students for careers in music, entertainment, and beyond —
-            through real connections, real knowledge, and real opportunities.
-          </p>
-
-          <div className="flex items-center gap-6">
-            <a
-              href="#join"
-              className="group flex items-center gap-3 text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300"
-              style={{
-                background: 'var(--crimson)',
-                color: 'var(--cream)',
-                fontFamily: 'DM Mono, monospace',
-              }}
-              onMouseEnter={(e) => {
-                ;(e.currentTarget as HTMLElement).style.background = 'var(--scarlet)'
-              }}
-              onMouseLeave={(e) => {
-                ;(e.currentTarget as HTMLElement).style.background = 'var(--crimson)'
-              }}
-            >
-              Apply to Join
-              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
-            </a>
-            <a
-              href="#about"
-              className="text-sm tracking-widest uppercase transition-colors duration-300"
-              style={{
-                color: 'rgba(245,241,232,0.5)',
-                fontFamily: 'DM Mono, monospace',
-              }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = 'var(--cream)')}
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = 'rgba(245,241,232,0.5)')
-              }
-            >
-              Learn More ↓
-            </a>
+          <div style={{ fontSize: '17px', fontWeight: 'bold', color: '#1C1C1C', letterSpacing: '0.05em' }}>
+            UChicago
+          </div>
+          <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#800000', textTransform: 'uppercase', letterSpacing: '0.22em', marginTop: '3px' }}>
+            Music Business
           </div>
         </div>
 
-        {/* Bottom rule */}
-        <div
-          className="mt-16 h-px opacity-0-init animate-fade-in"
+        {/* Divider */}
+        <div style={{ width: '40px', height: '2px', background: '#800000', margin: '20px auto', opacity: 0.5 }} />
+
+        {/* Headlines */}
+        <div>
+          <h1 style={{ fontSize: 'clamp(30px, 5vw, 54px)', fontWeight: 800, color: '#1C1C1C', margin: '0 0 6px', lineHeight: 1.08 }}>
+            Serious about the business.
+          </h1>
+          <h2 style={{ fontSize: 'clamp(30px, 5vw, 54px)', fontWeight: 800, color: '#800000', margin: 0, lineHeight: 1.08 }}>
+            Obsessed with the music.
+          </h2>
+        </div>
+
+        {/* Subheadline */}
+        <p style={{ fontSize: '15px', color: '#555', maxWidth: '420px', margin: '20px auto 36px', lineHeight: 1.6 }}>
+          A pre-professional organization dedicated to the intersection of culture and commerce.
+        </p>
+
+        {/* CTA */}
+        <Link
+          href="/listhost"
           style={{
-            background:
-              'linear-gradient(to right, var(--crimson), var(--teal), transparent)',
-            animationDelay: '0.8s',
-            animationFillMode: 'forwards',
+            display: 'inline-block',
+            backgroundColor: '#800000',
+            color: '#F5F1E8',
+            padding: '15px 36px',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '13px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            borderRadius: '2px',
+            marginBottom: '48px',
           }}
-        />
+        >
+          Get Notified
+        </Link>
+
+        {/* Footer Tag */}
+        <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+          Launching Spring 2026
+        </div>
+
       </div>
     </section>
   )
